@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import ChatWidget from "@/components/ChatWidget";
 
 export const metadata: Metadata = {
-  title: "My Next.js Site",
+  title: "FarmFerry",
   description: "Built with Next.js and Tailwind CSS",
 };
 
