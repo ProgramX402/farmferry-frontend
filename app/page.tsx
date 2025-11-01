@@ -28,10 +28,11 @@ function TypewriterText({ text, speed = 40 }) {
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const pageVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8, ease: "easeOut" } },
+    visible: { opacity: 1, transition: { duration: 0.8, ease: "easeOut" as const } },
     exit: { opacity: 0, transition: { duration: 0.3 } },
   };
 
@@ -41,6 +42,10 @@ export default function Home() {
       document.body.style.overflowX = "auto";
     };
   }, []);
+
+  const handlePlayVideo = () => {
+    setIsVideoPlaying(true);
+  };
 
   return (
     <motion.div
@@ -430,11 +435,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <FAQSection />
-      <Newsletter />
-
-{/* === Video Section === */}
+      {/* === Video Section === */}
 <section className="bg-white py-20 px-6 sm:px-10 overflow-x-hidden">
   <div className="max-w-6xl mx-auto">
     <motion.div
@@ -462,36 +463,45 @@ export default function Home() {
       
       {/* YouTube Embed - Responsive */}
       <div className="absolute inset-0 w-full h-full">
-        <iframe
-          className="w-full h-full"
-          src="https://www.youtube.com/embed/ofR3XAZGx9o?si=mo9mPxHFmG8E8ED0&controls=0&autoplay=0&mute=1&loop=1&playlist=ofR3XAZGx9o&modestbranding=1&rel=0"
-          title="FarmFerry - Empowering Farmers"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+        {!isVideoPlaying ? (
+          <div className="relative w-full h-full">
+            <Image
+              src="/video-thumbnail.jpg" // Use a local image in your public folder
+              alt="FarmFerry Video Thumbnail"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-black/30"></div>
+          </div>
+        ) : (
+          <iframe
+            className="w-full h-full"
+            src="https://www.youtube.com/embed/ofR3XAZGx9o?si=mo9mPxHFmG8E8ED0&autoplay=1&controls=1&mute=0&loop=1&playlist=ofR3XAZGx9o&modestbranding=1&rel=0"
+            title="FarmFerry - Empowering Farmers"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          ></iframe>
+        )}
       </div>
       
       {/* Custom Play Button Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center z-20">
-        <motion.button
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          viewport={{ once: true }}
-          className="bg-white/90 rounded-full p-5 shadow-lg hover:bg-white transition-colors"
-          onClick={() => {
-            const iframe = document.querySelector('iframe');
-            if (iframe) {
-              iframe.src = iframe.src.replace('controls=0', 'controls=1');
-            }
-          }}
-        >
-          <Play size={36} className="text-green-900 fill-green-900 ml-1" />
-        </motion.button>
-      </div>
+      {!isVideoPlaying && (
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <motion.button
+            initial={{ scale: 0.8, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="bg-white/90 rounded-full p-5 shadow-lg hover:bg-white transition-colors"
+            onClick={handlePlayVideo}
+          >
+            <Play size={36} className="text-green-900 fill-green-900 ml-1" />
+          </motion.button>
+        </div>
+      )}
     </motion.div>
 
     <motion.div
@@ -518,6 +528,8 @@ export default function Home() {
     </motion.div>
   </div>
 </section>
+      <FAQSection />
+      <Newsletter />
     </motion.div>
   );
 }
