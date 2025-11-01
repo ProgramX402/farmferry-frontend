@@ -12,7 +12,12 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 
 // === Typewriter Effect Helper ===
-function TypewriterText({ text, speed = 40 }) {
+interface TypewriterTextProps {
+  text: string;
+  speed?: number;
+}
+
+function TypewriterText({ text, speed = 40 }: TypewriterTextProps) {
   const [displayedText, setDisplayedText] = useState("");
   useEffect(() => {
     let index = 0;
@@ -330,7 +335,7 @@ export default function Home() {
             className="flex-1 flex justify-center"
           >
             <Image
-              src="/founder.jpg"
+              src="/founder2.jpg"
               alt="Founder"
               width={400}
               height={400}
@@ -435,99 +440,101 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
       {/* === Video Section === */}
-<section className="bg-white py-20 px-6 sm:px-10 overflow-x-hidden">
-  <div className="max-w-6xl mx-auto">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      viewport={{ once: true }}
-      className="text-center space-y-6 mb-12"
-    >
-      <h2 className="text-4xl font-bold text-green-900">See Our Work in Action</h2>
-      <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-        Watch how FarmFerry is transforming agriculture and empowering farmers across Nigeria. 
-        Our innovative approach combines traditional wisdom with modern technology to create sustainable solutions.
-      </p>
-    </motion.div>
-
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.7 }}
-      viewport={{ once: true }}
-      className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl bg-gray-100"
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 to-green-700/20 z-10 pointer-events-none"></div>
-      
-      {/* YouTube Embed - Responsive */}
-      <div className="absolute inset-0 w-full h-full">
-        {!isVideoPlaying ? (
-          <div className="relative w-full h-full">
-            <Image
-              src="/video-thumbnail.jpg" // Use a local image in your public folder
-              alt="FarmFerry Video Thumbnail"
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-black/30"></div>
-          </div>
-        ) : (
-          <iframe
-            className="w-full h-full"
-            src="https://www.youtube.com/embed/ofR3XAZGx9o?si=mo9mPxHFmG8E8ED0&autoplay=1&controls=1&mute=0&loop=1&playlist=ofR3XAZGx9o&modestbranding=1&rel=0"
-            title="FarmFerry - Empowering Farmers"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          ></iframe>
-        )}
-      </div>
-      
-      {/* Custom Play Button Overlay */}
-      {!isVideoPlaying && (
-        <div className="absolute inset-0 flex items-center justify-center z-20">
-          <motion.button
-            initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+      <section className="bg-white py-20 px-6 sm:px-10 overflow-x-hidden">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-white/90 rounded-full p-5 shadow-lg hover:bg-white transition-colors"
-            onClick={handlePlayVideo}
+            className="text-center space-y-6 mb-12"
           >
-            <Play size={36} className="text-green-900 fill-green-900 ml-1" />
-          </motion.button>
-        </div>
-      )}
-    </motion.div>
+            <h2 className="text-4xl font-bold text-green-900">See Our Work in Action</h2>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Watch how FarmFerry is transforming agriculture and empowering farmers across Nigeria. 
+              Our innovative approach combines traditional wisdom with modern technology to create sustainable solutions.
+            </p>
+          </motion.div>
 
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.3 }}
-      viewport={{ once: true }}
-      className="text-center mt-10"
-    >
-      <p className="text-gray-600 mb-6">
-        Join our community of farmers and supporters. Subscribe to our YouTube channel for more updates.
-      </p>
-      <a
-        href="https://www.youtube.com/channel/your-channel-id"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
-        </svg>
-        Subscribe to Our Channel
-      </a>
-    </motion.div>
-  </div>
-</section>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl bg-gray-100"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-green-900/20 to-green-700/20 z-10 pointer-events-none"></div>
+            
+            {/* YouTube Embed - Responsive */}
+            <div className="absolute inset-0 w-full h-full">
+              {!isVideoPlaying ? (
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/video-thumbnail.jpg" // Use a local image in your public folder
+                    alt="FarmFerry Video Thumbnail"
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black/30"></div>
+                </div>
+              ) : (
+                <iframe
+                  className="w-full h-full"
+                  src="https://www.youtube.com/embed/ofR3XAZGx9o?si=mo9mPxHFmG8E8ED0&autoplay=1&controls=1&mute=0&loop=1&playlist=ofR3XAZGx9o&modestbranding=1&rel=0"
+                  title="FarmFerry - Empowering Farmers"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              )}
+            </div>
+            
+            {/* Custom Play Button Overlay */}
+            {!isVideoPlaying && (
+              <div className="absolute inset-0 flex items-center justify-center z-20">
+                <motion.button
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="bg-white/90 rounded-full p-5 shadow-lg hover:bg-white transition-colors"
+                  onClick={handlePlayVideo}
+                >
+                  <Play size={36} className="text-green-900 fill-green-900 ml-1" />
+                </motion.button>
+              </div>
+            )}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center mt-10"
+          >
+            <p className="text-gray-600 mb-6">
+              Join our community of farmers and supporters. Subscribe to our YouTube channel for more updates.
+            </p>
+            <a
+              href="https://www.youtube.com/channel/your-channel-id"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+              </svg>
+              Subscribe to Our Channel
+            </a>
+          </motion.div>
+        </div>
+      </section>
+      
       <FAQSection />
       <Newsletter />
     </motion.div>

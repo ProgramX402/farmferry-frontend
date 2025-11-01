@@ -1,7 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export function TypewriterText({ text, speed = 40 }) {
+// Define the props interface
+interface TypewriterTextProps {
+  text: string;
+  speed?: number;
+}
+
+export function TypewriterText({ text, speed = 40 }: TypewriterTextProps) {
   const [displayedText, setDisplayedText] = useState("");
 
   useEffect(() => {
