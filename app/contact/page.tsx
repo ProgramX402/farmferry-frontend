@@ -3,10 +3,25 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
+
+// Define the form data type
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  subject: string;
+  message: string;
+}
+
+// Define the status type
+interface Status {
+  success: boolean | null;
+  message: string;
+}
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
     email: "",
@@ -15,15 +30,15 @@ export default function ContactPage() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState({ success: null, message: "" });
+  const [status, setStatus] = useState<Status>({ success: null, message: "" });
 
-  // Handle form inputs
-  const handleChange = (e) => {
+  // Handle form inputs with proper typing
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Submit handler
-  const handleSubmit = async (e) => {
+  // Submit handler with proper typing
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setStatus({ success: null, message: "" });
@@ -51,7 +66,7 @@ export default function ContactPage() {
     } catch (err) {
       setStatus({
         success: false,
-        message: err.message || "❌ Something went wrong. Try again.",
+        message: err instanceof Error ? err.message : "❌ Something went wrong. Try again.",
       });
     } finally {
       setLoading(false);
@@ -79,7 +94,7 @@ export default function ContactPage() {
             Get in Touch 🌱
           </h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto">
-            We’d love to hear from you — whether you’re a farmer, partner, or
+            We'd love to hear from you — whether you're a farmer, partner, or
             simply curious about what we do.
           </p>
         </motion.div>
@@ -95,11 +110,11 @@ export default function ContactPage() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl font-bold text-green-900 mb-6">
-            Let’s Connect
+            Let's Connect
           </h2>
           <p className="text-gray-700 mb-8">
             Have questions, feedback, or collaboration ideas? Reach out to us — 
-            we’ll respond as soon as possible.
+            we'll respond as soon as possible.
           </p>
 
           <div className="space-y-4">
@@ -205,7 +220,7 @@ export default function ContactPage() {
               name="subject"
               value={formData.subject}
               onChange={handleChange}
-              placeholder="What’s your message about?"
+              placeholder="What's your message about?"
               required
               className="w-full border border-gray-300 rounded-md p-3 text-black focus:ring-2 focus:ring-green-700 outline-none"
             />
