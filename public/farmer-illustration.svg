@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <rect width="640" height="480" fill="#F0FDF4"></rect>
+  <path d="M0 400h640v80H0z" fill="#166534"></path>
+  <circle cx="480" cy="160" r="100" fill="#22C55E"></circle>
+  <path d="M400 300h60v-60h-60z" fill="#FACC15"></path>
+  <path d="M460 300c0-33.14 26.86-60 60-60s60 26.86 60 60H460z" fill="#84CC16"></path>
+  <path d="M100 350c0-44.18 35.82-80 80-80s80 35.82 80 80H100z" fill="#15803D"></path>
+  <circle cx="180" cy="280" r="15" fill="#FBBF24"></circle>
+  <path d="M190 280l40-60 20 10-30 50z" fill="#92400E"></path>
+  <path d="M220 230l20-40 10 5-15 35z" fill="#78350F"></path>
+  <text x="320" y="440" text-anchor="middle" fill="#166534" font-size="24" font-weight="bold" font-family="sans-serif">
+    Farmer at Work
+  </text>
+</svg>
