@@ -1,16 +1,26 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, User, AlertCircle, X } from "lucide-react";
 import Image from "next/image";
 
+// Define types for better type safety
+interface Blog {
+  _id: string;
+  title: string;
+  content: string;
+  mediaUrl?: string;
+  createdAt: string;
+}
+
 export default function BlogsPage() {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [selectedBlog, setSelectedBlog] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedBlog, setSelectedBlog] = useState<Blog | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
 
   // Base API URL
   const BASE_API_URL = process.env.NEXT_PUBLIC_API_URL || "https://farmferry-backend-n04p.onrender.com";
@@ -18,7 +28,7 @@ export default function BlogsPage() {
   const BLOGS_API_URL = `${BASE_API_URL}/api/blogs`;
 
   // Function to fetch blogs from the API
-  const fetchBlogsFromAPI = async () => {
+  const fetchBlogsFromAPI = async (): Promise<Blog[]> => {
     try {
       console.log("Fetching blogs from:", BLOGS_API_URL);
       
@@ -86,7 +96,7 @@ export default function BlogsPage() {
   };
 
   // Function to open the blog modal
-  const openBlogModal = (blog) => {
+  const openBlogModal = (blog: Blog) => {
     setSelectedBlog(blog);
     setIsModalOpen(true);
     // Prevent body scroll when modal is open
@@ -98,6 +108,18 @@ export default function BlogsPage() {
     setIsModalOpen(false);
     // Restore body scroll
     document.body.style.overflow = 'unset';
+  };
+
+  // Clean up body scroll on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, []);
+
+  // Handle image errors
+  const handleImageError = (blogId: string) => {
+    setImageErrors(prev => new Set(prev).add(blogId));
   };
 
   return (
@@ -177,23 +199,13 @@ export default function BlogsPage() {
               className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
               <div className="relative w-full h-48">
-                {blog.mediaUrl ? (
+                {blog.mediaUrl && !imageErrors.has(blog._id) ? (
                   <Image
                     src={blog.mediaUrl}
                     alt={blog.title}
                     fill
                     className="object-cover"
-                    onError={(e) => {
-                      // Fallback to a placeholder image on error
-                      e.target.style.display = 'none';
-                      const parent = e.target.parentElement;
-                      if (parent) {
-                        const fallback = document.createElement('div');
-                        fallback.className = 'w-full h-full bg-gray-200 flex items-center justify-center';
-                        fallback.innerHTML = '<span class="text-gray-500">Image unavailable</span>';
-                        parent.appendChild(fallback);
-                      }
-                    }}
+                    onError={() => handleImageError(blog._id)}
                   />
                 ) : (
                   <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -229,94 +241,91 @@ export default function BlogsPage() {
         )}
       </section>
 
-      {/* Blog Modal */}
-      {isModalOpen && selectedBlog && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 overflow-y-auto"
-          onClick={closeBlogModal}
-        >
-          <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
-            {/* Background overlay */}
-            <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-              <div className="absolute inset-0 bg-black opacity-75"></div>
-            </div>
+      {/* Blog Modal with AnimatePresence */}
+      <AnimatePresence>
+        {isModalOpen && selectedBlog && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 overflow-y-auto"
+            onClick={closeBlogModal}
+          >
+            <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
+              {/* Background overlay */}
+              <div className="fixed inset-0 transition-opacity" aria-hidden="true">
+                <div className="absolute inset-0 bg-black opacity-75"></div>
+              </div>
 
-            {/* Modal panel */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative">
-                {/* Close button */}
-                <button
-                  onClick={closeBlogModal}
-                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 hover:bg-white text-gray-700 shadow-md transition-colors"
-                >
-                  <X size={20} />
-                </button>
+              {/* Modal panel */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="relative">
+                  {/* Close button */}
+                  <button
+                    onClick={closeBlogModal}
+                    className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 hover:bg-white text-gray-700 shadow-md transition-colors"
+                  >
+                    <X size={20} />
+                  </button>
 
-                {/* Blog image */}
-                {selectedBlog.mediaUrl && (
-                  <div className="relative w-full h-64 md:h-96">
-                    <Image
-                      src={selectedBlog.mediaUrl}
-                      alt={selectedBlog.title}
-                      fill
-                      className="object-cover"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        const parent = e.target.parentElement;
-                        if (parent) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'w-full h-full bg-gray-200 flex items-center justify-center';
-                          fallback.innerHTML = '<span class="text-gray-500">Image unavailable</span>';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-                  </div>
-                )}
+                  {/* Blog image */}
+                  {selectedBlog.mediaUrl && !imageErrors.has(selectedBlog._id) ? (
+                    <div className="relative w-full h-64 md:h-96">
+                      <Image
+                        src={selectedBlog.mediaUrl}
+                        alt={selectedBlog.title}
+                        fill
+                        className="object-cover"
+                        onError={() => handleImageError(selectedBlog._id)}
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-full h-64 md:h-96 bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-500">Image unavailable</span>
+                    </div>
+                  )}
 
-                {/* Blog content */}
-                <div className="px-6 py-6">
-                  <h2 className="text-2xl md:text-3xl font-bold text-green-900 mb-4">
-                    {selectedBlog.title}
-                  </h2>
-                  
-                  <div className="flex items-center text-gray-500 text-sm mb-6 space-x-4">
-                    <span className="flex items-center gap-1">
-                      <User size={16} /> Admin
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Calendar size={16} />{" "}
-                      {new Date(selectedBlog.createdAt).toLocaleDateString(undefined, {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                      })}
-                    </span>
-                  </div>
-                  
-                  <div className="prose prose-lg max-w-none text-gray-700">
-                    {selectedBlog.content.split('\n').map((paragraph, index) => (
-                      <p key={index} className="mb-4">
-                        {paragraph}
-                      </p>
-                    ))}
+                  {/* Blog content */}
+                  <div className="px-6 py-6">
+                    <h2 className="text-2xl md:text-3xl font-bold text-green-900 mb-4">
+                      {selectedBlog.title}
+                    </h2>
+                    
+                    <div className="flex items-center text-gray-500 text-sm mb-6 space-x-4">
+                      <span className="flex items-center gap-1">
+                        <User size={16} /> Admin
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Calendar size={16} />{" "}
+                        {new Date(selectedBlog.createdAt).toLocaleDateString(undefined, {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </span>
+                    </div>
+                    
+                    <div className="prose prose-lg max-w-none text-gray-700">
+                      {selectedBlog.content.split('\n').map((paragraph, index) => (
+                        <p key={index} className="mb-4">
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-      )}
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
