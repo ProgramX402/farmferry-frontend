@@ -235,7 +235,7 @@ export default function ContactPage() {
               name="message"
               value={formData.message}
               onChange={handleChange}
-              rows="4"
+              rows={4} // Changed from string "4" to number 4
               placeholder="Write your message here..."
               required
               className="w-full border border-gray-300 rounded-md p-3 text-black focus:ring-2 focus:ring-green-700 outline-none resize-none"

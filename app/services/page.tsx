@@ -50,16 +50,16 @@ const services = [
   },
 ];
 
-// Animation variant for the floating farm elements
+// Animation variant for the floating farm elements - Fixed with proper typing
 const floatFarmVariant = {
   animate: {
     y: ["-15%", "15%", "-15%"], // Floats up and down
     x: ["0%", "10%", "-10%", "0%"], // Moves slightly side to side
     rotate: [0, 3, -3, 0], // Subtle rotation
     transition: {
-      y: { duration: 10, repeat: Infinity, ease: "easeInOut" },
-      x: { duration: 15, repeat: Infinity, ease: "easeInOut" },
-      rotate: { duration: 20, repeat: Infinity, ease: "easeInOut" },
+      y: { duration: 10, repeat: Infinity, ease: "easeInOut" as const },
+      x: { duration: 15, repeat: Infinity, ease: "easeInOut" as const },
+      rotate: { duration: 20, repeat: Infinity, ease: "easeInOut" as const },
     },
   },
 };
@@ -81,7 +81,7 @@ export default function ServicesPage() {
           className="absolute bottom-[15%] right-[8%] opacity-20"
           variants={floatFarmVariant}
           animate="animate"
-          transition={{ ...floatFarmVariant.animate.transition, duration: 12, delay: 0.5 }}
+          transition={{ ...floatFarmVariant.animate.transition, duration: 12, delay: 0.5, ease: "easeInOut" as const }}
         >
           <Sprout size={50} className="text-green-300" />
         </motion.div>
@@ -89,7 +89,7 @@ export default function ServicesPage() {
           className="absolute top-[30%] right-[15%] opacity-20"
           variants={floatFarmVariant}
           animate="animate"
-          transition={{ ...floatFarmVariant.animate.transition, duration: 18, delay: 1 }}
+          transition={{ ...floatFarmVariant.animate.transition, duration: 18, delay: 1, ease: "easeInOut" as const }}
         >
           <Leaf size={40} className="text-green-300" />
         </motion.div>
@@ -97,7 +97,7 @@ export default function ServicesPage() {
           className="absolute bottom-[5%] left-[20%] opacity-20"
           variants={floatFarmVariant}
           animate="animate"
-          transition={{ ...floatFarmVariant.animate.transition, duration: 14, delay: 0.2 }}
+          transition={{ ...floatFarmVariant.animate.transition, duration: 14, delay: 0.2, ease: "easeInOut" as const }}
         >
           <CloudSun size={70} className="text-green-300" />
         </motion.div>
@@ -170,7 +170,7 @@ export default function ServicesPage() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="max-w-2xl mx-auto text-green-100 mb-10"
         >
-          Join thousands of farmers already benefiting from our platform’s tools,
+          Join thousands of farmers already benefiting from our platform's tools,
           training, and community support.
         </motion.p>
 
