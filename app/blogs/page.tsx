@@ -54,7 +54,8 @@ export default function BlogsPage() {
         setBlogs(data);
         setError(null);
       } catch (err) {
-        setError(err.message);
+        // Type assertion to handle unknown error type
+        setError(err instanceof Error ? err.message : "An unknown error occurred");
       } finally {
         setLoading(false);
       }
@@ -74,7 +75,8 @@ export default function BlogsPage() {
         setBlogs(data);
         setError(null);
       } catch (err) {
-        setError(err.message);
+        // Type assertion to handle unknown error type
+        setError(err instanceof Error ? err.message : "An unknown error occurred");
       } finally {
         setLoading(false);
       }
@@ -239,7 +241,7 @@ export default function BlogsPage() {
           <div className="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
             {/* Background overlay */}
             <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-              <div className="absolute inset-0 bg-white opacity-100"></div>
+              <div className="absolute inset-0 bg-black opacity-75"></div>
             </div>
 
             {/* Modal panel */}
