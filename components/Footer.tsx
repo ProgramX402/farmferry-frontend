@@ -7,8 +7,8 @@ import { useState } from "react";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(null);
-  const [status, setStatus] = useState(null); // 'success' or 'error'
+  const [message, setMessage] = useState<string | null>(null);
+  const [status, setStatus] = useState<"success" | "error" | null>(null); // Explicitly type as success, error, or null
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const API_URL = 'https://farmferry-backend-n04p.onrender.com/api/newsletter/subscribe';
