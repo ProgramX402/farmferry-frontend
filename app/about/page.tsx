@@ -22,20 +22,20 @@ const teamMembers = [
   {
     name: "Aisha Bello",
     role: "Community Manager",
-    image: "/founder.jpg",
+    image: "/team4.jpg",
   },
 ];
 
-// Animation variant for the floating circles
+// Animation variant for the floating circles - Fixed with proper typing
 const floatVariant = {
   animate: {
     y: ["-10%", "10%", "-10%"], // Moves up and down
     x: ["0%", "5%", "0%"], // Also moves slightly side to side
     rotate: [0, 5, 0], // Subtle rotation
     transition: {
-      y: { duration: 8, repeat: Infinity, ease: "easeInOut" },
-      x: { duration: 10, repeat: Infinity, ease: "easeInOut" },
-      rotate: { duration: 12, repeat: Infinity, ease: "easeInOut" },
+      y: { duration: 8, repeat: Infinity, ease: "easeInOut" as const },
+      x: { duration: 10, repeat: Infinity, ease: "easeInOut" as const },
+      rotate: { duration: 12, repeat: Infinity, ease: "easeInOut" as const },
     },
   },
 };
@@ -55,19 +55,19 @@ export default function AboutPage() {
           className="absolute bottom-1/4 right-[10%] h-8 w-8 bg-white opacity-10 rounded-full"
           variants={floatVariant}
           animate="animate"
-          transition={{ ...floatVariant.animate.transition, y: { duration: 12, repeat: Infinity, ease: "easeInOut" } }}
+          transition={{ ...floatVariant.animate.transition, y: { duration: 12, repeat: Infinity, ease: "easeInOut" as const } }}
         />
         <motion.div
           className="absolute top-[10%] right-[30%] h-10 w-10 bg-white opacity-10 rounded-full"
           variants={floatVariant}
           animate="animate"
-          transition={{ ...floatVariant.animate.transition, y: { duration: 9, repeat: Infinity, ease: "easeInOut" } }}
+          transition={{ ...floatVariant.animate.transition, y: { duration: 9, repeat: Infinity, ease: "easeInOut" as const } }}
         />
         <motion.div
           className="absolute bottom-[5%] left-[20%] h-24 w-24 bg-white opacity-10 rounded-full"
           variants={floatVariant}
           animate="animate"
-          transition={{ ...floatVariant.animate.transition, y: { duration: 15, repeat: Infinity, ease: "easeInOut" } }}
+          transition={{ ...floatVariant.animate.transition, y: { duration: 15, repeat: Infinity, ease: "easeInOut" as const } }}
         />
         
         {/* Content - Set relative z-index to ensure it sits on top of the circles */}
@@ -110,7 +110,7 @@ export default function AboutPage() {
               sustainable growth for communities.
             </p>
             <p className="text-gray-700 leading-relaxed">
-              We believe that agriculture is more than just food production — it’s about
+              We believe that agriculture is more than just food production — it's about
               community, empowerment, and the future of our planet.
             </p>
           </motion.div>
