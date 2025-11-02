@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
         "X-Title": "FarmFerry Chat",
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct:free", // ✅ free model
+        model: "nvidia/nemotron-nano-12b-v2-vl:free", // ✅ free model
         messages: [
           {
             role: "system",
