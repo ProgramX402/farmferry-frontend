@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       headers: {
         Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`, // server-only
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://farmferry.netlify.app", // must match your domain exactly (no trailing slash)
+        "HTTP-Referer": "https://farmferry.netlify.app/", // must match your domain exactly (no trailing slash)
         "X-Title": "FarmFerry Chat",
       },
       body: JSON.stringify({
