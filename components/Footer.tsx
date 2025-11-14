@@ -61,7 +61,7 @@ export default function Footer() {
       >
         {/* === Left Column === */}
         <div className="space-y-4">
-          <h2 className="text-2xl font-bold text-white">FarmFerry 🌿</h2>
+          <h2 className="text-2xl font-bold text-white">Farm Ferry 🌿</h2>
           <p className="text-green-200 leading-relaxed">
             Empowering farmers through innovation, sustainability, and technology for a greener tomorrow.
           </p>
@@ -165,7 +165,7 @@ export default function Footer() {
 
       {/* Divider Line */}
       <div className="border-t border-green-800 mt-12 pt-6 text-center text-green-300 text-sm">
-        © {new Date().getFullYear()} <span className="font-semibold text-white">FarmFerry</span>.  
+        © {new Date().getFullYear()} <span className="font-semibold text-white">Farm Ferry</span>.  
         All rights reserved.
       </div>
 

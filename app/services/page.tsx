@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Tractor,
   Sprout,
@@ -8,54 +9,66 @@ import {
   ShoppingBag,
   Leaf,
   BarChart3,
+  X,
+  Wheat,
 } from "lucide-react";
-import Image from "next/image"; // Import Image for custom farm elements
 
 const services = [
   {
-    icon: Tractor,
-    title: "Modern Farm Equipment",
-    description:
-      "We provide access to affordable, efficient farming equipment that helps increase productivity and reduce labor costs.",
-  },
-  {
     icon: Sprout,
-    title: "Sustainable Agriculture",
+    title: "Fresh Farm Service",
     description:
-      "We promote eco-friendly practices that preserve the environment and ensure long-term food security.",
+      "Access freshly harvested produce directly from trusted local farmers.",
+    details:
+      "We connect consumers and retailers to high-quality farm produce straight from partner farms. Our logistics network ensures freshness, food safety, and fair pricing for both farmers and buyers.",
   },
   {
     icon: CloudSun,
-    title: "Weather & Crop Insights",
+    title: "Greenhouse Set Up",
     description:
-      "Get real-time weather forecasts and crop health analytics powered by data and technology.",
+      "Design and build greenhouse systems for all-season farming.",
+    details:
+      "We handle end-to-end greenhouse installation — from structure design to irrigation and automation setup. Whether small-scale or commercial, we ensure climate efficiency and high productivity.",
+  },
+  {
+    icon: Wheat,
+    title: "Seedlings",
+    description:
+      "Certified, disease-resistant seedlings for optimal crop performance.",
+    details:
+      "Our nurseries supply improved seedlings tailored for various soils and climates. We ensure access to high-yield vegetable, fruit, and cash crop varieties for consistent growth results.",
   },
   {
     icon: ShoppingBag,
-    title: "Market Access",
+    title: "Farm Inputs",
     description:
-      "We connect farmers directly with buyers and cooperatives, ensuring fair prices and transparent transactions.",
+      "Affordable fertilizers, pesticides, and quality agricultural tools.",
+    details:
+      "We connect farmers with reliable suppliers for fertilizers, organic manure, irrigation systems, and protective equipment — all verified to ensure quality and value for money.",
   },
   {
     icon: Leaf,
-    title: "Training & Education",
+    title: "Training",
     description:
-      "Our platform provides expert-led workshops, videos, and guides on modern agricultural techniques.",
+      "Empowering farmers with modern agricultural knowledge and skills.",
+    details:
+      "We organize field workshops, demo sessions, and agribusiness mentorships covering crop management, pest control, greenhouse farming, and digital tools for farm efficiency.",
   },
   {
     icon: BarChart3,
-    title: "Financial Support",
+    title: "Consultancy",
     description:
-      "We partner with financial institutions to provide loans and grants to small-scale farmers.",
+      "Expert guidance for agribusiness startups and farm expansion.",
+    details:
+      "Our agronomists and consultants provide in-depth support for farm planning, irrigation design, crop selection, and business strategy — ensuring data-driven growth decisions.",
   },
 ];
 
-// Animation variant for the floating farm elements - Fixed with proper typing
 const floatFarmVariant = {
   animate: {
-    y: ["-15%", "15%", "-15%"], // Floats up and down
-    x: ["0%", "10%", "-10%", "0%"], // Moves slightly side to side
-    rotate: [0, 3, -3, 0], // Subtle rotation
+    y: ["-15%", "15%", "-15%"],
+    x: ["0%", "10%", "-10%", "0%"],
+    rotate: [0, 3, -3, 0],
     transition: {
       y: { duration: 10, repeat: Infinity, ease: "easeInOut" as const },
       x: { duration: 15, repeat: Infinity, ease: "easeInOut" as const },
@@ -65,11 +78,12 @@ const floatFarmVariant = {
 };
 
 export default function ServicesPage() {
+  const [selectedService, setSelectedService] = useState<any>(null);
+
   return (
-    <main className="bg-white text-gray-900 overflow-hidden">
-      {/* === Hero Section (Modified) === */}
+    <main className="bg-white text-gray-900 overflow-hidden relative">
+      {/* === Hero Section === */}
       <section className="relative bg-green-900 text-white py-24 px-8 text-center overflow-hidden">
-        {/* Animated Farm Elements */}
         <motion.div
           className="absolute top-[10%] left-[5%] opacity-20"
           variants={floatFarmVariant}
@@ -81,7 +95,6 @@ export default function ServicesPage() {
           className="absolute bottom-[15%] right-[8%] opacity-20"
           variants={floatFarmVariant}
           animate="animate"
-          transition={{ ...floatFarmVariant.animate.transition, duration: 12, delay: 0.5, ease: "easeInOut" as const }}
         >
           <Sprout size={50} className="text-green-300" />
         </motion.div>
@@ -89,20 +102,10 @@ export default function ServicesPage() {
           className="absolute top-[30%] right-[15%] opacity-20"
           variants={floatFarmVariant}
           animate="animate"
-          transition={{ ...floatFarmVariant.animate.transition, duration: 18, delay: 1, ease: "easeInOut" as const }}
         >
           <Leaf size={40} className="text-green-300" />
         </motion.div>
-        <motion.div
-          className="absolute bottom-[5%] left-[20%] opacity-20"
-          variants={floatFarmVariant}
-          animate="animate"
-          transition={{ ...floatFarmVariant.animate.transition, duration: 14, delay: 0.2, ease: "easeInOut" as const }}
-        >
-          <CloudSun size={70} className="text-green-300" />
-        </motion.div>
 
-        {/* Content - Set relative z-index to ensure it sits on top of the elements */}
         <div className="relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -118,13 +121,11 @@ export default function ServicesPage() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="max-w-2xl mx-auto text-lg text-green-100"
           >
-            Empowering farmers with the tools, training, and technology they need to
-            succeed in a modern world.
+            Empowering agribusinesses and farmers with modern tools, training,
+            and expert support to grow sustainably.
           </motion.p>
         </div>
       </section>
-
-      {/* --- */}
 
       {/* === Services Grid === */}
       <section className="py-20 px-8">
@@ -137,7 +138,8 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.15, duration: 0.6 }}
-                className="bg-green-50 rounded-xl shadow-md hover:shadow-lg p-8 flex flex-col items-center text-center transition transform hover:-translate-y-2"
+                onClick={() => setSelectedService(service)}
+                className="bg-green-50 rounded-xl shadow-md hover:shadow-lg p-8 flex flex-col items-center text-center transition transform hover:-translate-y-2 cursor-pointer"
               >
                 <div className="bg-green-900 text-white p-4 rounded-full mb-6">
                   <Icon size={32} />
@@ -152,9 +154,50 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* --- */}
+      {/* === Modal === */}
+      <AnimatePresence>
+        {selectedService && (
+          <motion.div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-white rounded-2xl p-8 max-w-lg mx-4 text-center relative shadow-xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                onClick={() => setSelectedService(null)}
+                className="absolute top-4 right-4 text-gray-600 hover:text-green-700"
+              >
+                <X size={24} />
+              </button>
 
-      {/* === Call to Action === */}
+              <div className="flex flex-col items-center">
+                <div className="bg-green-900 text-white p-4 rounded-full mb-4">
+                  <selectedService.icon size={40} />
+                </div>
+                <h3 className="text-2xl font-bold text-green-900 mb-4">
+                  {selectedService.title}
+                </h3>
+                <p className="text-gray-700 mb-6">{selectedService.details}</p>
+                <button
+                  onClick={() => setSelectedService(null)}
+                  className="bg-green-900 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* === CTA === */}
       <section className="bg-green-900 text-white py-20 px-8 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
@@ -162,7 +205,7 @@ export default function ServicesPage() {
           transition={{ duration: 0.8 }}
           className="text-4xl font-bold mb-6"
         >
-          Ready to Transform Your Farming Journey?
+          Ready to Grow Your Agribusiness?
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -170,8 +213,8 @@ export default function ServicesPage() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="max-w-2xl mx-auto text-green-100 mb-10"
         >
-          Join thousands of farmers already benefiting from our platform's tools,
-          training, and community support.
+          Join our network of forward-thinking farmers, agribusiness owners,
+          and experts building a sustainable agricultural future.
         </motion.p>
 
         <motion.a

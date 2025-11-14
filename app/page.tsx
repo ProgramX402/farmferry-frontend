@@ -9,6 +9,7 @@ import Newsletter from "@/components/Newsletter";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import Head from "next/head";
 import { Autoplay, Pagination } from "swiper/modules";
 
 // === Typewriter Effect Helper ===
@@ -53,6 +54,16 @@ export default function Home() {
   };
 
   return (
+    <>
+    <Head>
+          <title>My Page Title</title>
+          <meta name="description" content="This is a description of my page" />
+          <meta property="og:title" content="My Page Title" />
+          <meta property="og:description" content="This is a description of my page" />
+          <meta property="og:type" content="website" />
+          {/* Add other meta tags as needed */}
+        </Head>
+
     <motion.div
       variants={pageVariants}
       initial="hidden"
@@ -74,7 +85,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl font-bold leading-tight">
               Empowering Farmers, Growing the Future 🌱
             </h1>
             <p className="text-lg text-green-100 max-w-md mx-auto md:mx-0">
@@ -130,7 +141,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <Image
-              src="/about-img.jpg"
+              src="/people.jpg"
               alt="Farmer working in the field"
               width={500}
               height={400}
@@ -198,12 +209,11 @@ export default function Home() {
                         ]
                       : tab === "vision"
                       ? [
-                          `Our vision is to create a world where every farmer — regardless of size, location, or background — has the tools, knowledge, and opportunities to thrive sustainably.`,
+                          `To be Africa’s leading youth-driven hub for sustainable agriculture — empowering young people, transforming communities, and ensuring access to safe, fresh, and nutritious food for all.`,
                           `We believe in bridging traditional wisdom with modern technology, building resilient food systems that nurture people and the planet alike.`,
                         ]
                       : [
-                          `Our mission is to empower rural communities by providing access to modern farming tools, education, and fair market opportunities.`,
-                          `Through innovation and collaboration, we aim to increase productivity, improve food security, and foster environmental stewardship for a greener tomorrow.`,
+                          `At Farm Ferry, we are committed to redefining agriculture through innovation, inclusion, and empowerment. We provide farm-fresh produce, greenhouse setups, high-quality seedlings, and reliable farm inputs. Through our hands-on training and expert consultancy, we equip young farmers and agripreneurs with the knowledge, tools, and opportunities to drive food security, create jobs, and build a sustainable agricultural future.`,
                         ];
 
                   return (
@@ -239,90 +249,91 @@ export default function Home() {
         </div>
       </section>
 
-      {/* === Our Services Section === */}
-      <section className="bg-gray-50 py-20 px-6 sm:px-10 overflow-x-hidden">
-        <div className="max-w-7xl mx-auto text-center space-y-12">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold text-green-900">Our Services</h2>
-            <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto">
-              We provide innovative agricultural solutions to help farmers thrive —
-              from technology access to sustainable farming support.
-            </p>
-          </motion.div>
+{/* === Our Services Section === */}
+<section className="bg-gray-50 py-20 px-6 sm:px-10 overflow-x-hidden">
+  <div className="max-w-7xl mx-auto text-center space-y-12">
+    {/* Header */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      <h2 className="text-4xl font-bold text-green-900">Our Services</h2>
+      <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto">
+        At FarmFerry, we offer a range of agricultural services designed to empower farmers,
+        boost productivity, and promote sustainable farming practices.
+      </p>
+    </motion.div>
 
-          {/* Services Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-            {[
-              {
-                icon: "🌾",
-                title: "Smart Farming Solutions",
-                text: "We offer data-driven tools that help farmers monitor crops, optimize irrigation, and increase yields sustainably.",
-              },
-              {
-                icon: "🚜",
-                title: "Modern Equipment Access",
-                text: "Our platform connects farmers with affordable leasing options for tractors and other essential farming machinery.",
-              },
-              {
-                icon: "💧",
-                title: "Sustainable Agriculture",
-                text: "We promote eco-friendly practices that conserve water, enrich soil health, and reduce environmental impact.",
-              },
-              {
-                icon: "📈",
-                title: "Market Access & Insights",
-                text: "Get connected to local and global markets with real-time pricing data and supply chain partnerships.",
-              },
-              {
-                icon: "🎓",
-                title: "Training & Capacity Building",
-                text: "Empowering farmers through education, workshops, and mentorship programs for sustainable growth.",
-              },
-              {
-                icon: "🤝",
-                title: "Community Development",
-                text: "We work with cooperatives and NGOs to build strong networks that support shared prosperity.",
-              },
-            ].map((service, i) => (
-              <motion.div
-                key={i}
-                className="bg-white rounded-xl shadow-md p-8 text-left hover:shadow-lg transition transform hover:-translate-y-2"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <div className="text-5xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-semibold text-green-900 mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-gray-700 leading-relaxed">{service.text}</p>
-              </motion.div>
-            ))}
-          </div>
+    {/* Services Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
+      {[
+        {
+          icon: "🥬",
+          title: "Fresh Farm Service",
+          text: "We provide consumers with fresh, organic farm produce delivered directly from our partner farms — ensuring quality, freshness, and traceability.",
+        },
+        {
+          icon: "🏠",
+          title: "Greenhouse Set Up",
+          text: "We design and construct modern greenhouse systems that enable year-round production, efficient irrigation, and climate-smart agriculture.",
+        },
+        {
+          icon: "🌱",
+          title: "Seedlings",
+          text: "Access high-quality, disease-resistant seedlings that ensure strong germination, better yields, and long-term farm success.",
+        },
+        {
+          icon: "🧺",
+          title: "Farm Inputs",
+          text: "We supply reliable, affordable, and certified farm inputs — from fertilizers to tools — helping farmers maximize productivity.",
+        },
+        {
+          icon: "🎓",
+          title: "Training",
+          text: "Through our training programs, we empower farmers and agripreneurs with practical knowledge in modern agriculture and agribusiness.",
+        },
+        {
+          icon: "💼",
+          title: "Consultancy",
+          text: "Our experts provide one-on-one guidance, feasibility studies, and strategic planning to help agribusinesses and farms grow sustainably.",
+        },
+      ].map((service, i) => (
+        <motion.div
+          key={i}
+          className="bg-white rounded-xl shadow-md p-8 text-left hover:shadow-lg transition transform hover:-translate-y-2"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: i * 0.1, duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-5xl mb-4">{service.icon}</div>
+          <h3 className="text-2xl font-semibold text-green-900 mb-3">
+            {service.title}
+          </h3>
+          <p className="text-gray-700 leading-relaxed">{service.text}</p>
+        </motion.div>
+      ))}
+    </div>
 
-          {/* Learn More Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <a
-              href="/services"
-              className="inline-block mt-10 bg-green-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-800 transition"
-            >
-              Learn More
-            </a>
-          </motion.div>
-        </div>
-      </section>
+    {/* Learn More Button */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+    >
+      <a
+        href="/services"
+        className="inline-block mt-10 bg-green-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-800 transition"
+      >
+        Learn More
+      </a>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* === Founder Section === */}
       <section className="bg-green-900 text-white py-20 px-6 sm:px-10 overflow-x-hidden">
@@ -352,7 +363,7 @@ export default function Home() {
           >
             <h2 className="text-4xl font-bold">A Word from Our Founder</h2>
             <TypewriterText
-              text={`"Farming is not just an occupation — it's a legacy. At FarmFerry, we're building a bridge between tradition and technology to ensure that every seed planted today nurtures a brighter, greener tomorrow."`}
+              text={`"Farming is not just an occupation — it's a legacy. At Farm Ferry, we're building a bridge between tradition and technology to ensure that every seed planted today nurtures a brighter, greener tomorrow."`}
             />
             <div className="mt-6">
               <p className="font-semibold text-green-200">— Enoch Tyulen</p>
@@ -472,7 +483,7 @@ export default function Home() {
               {!isVideoPlaying ? (
                 <div className="relative w-full h-full">
                   <Image
-                    src="/video-thumbnail.jpg" // Use a local image in your public folder
+                    src="/people.jpg" // Use a local image in your public folder
                     alt="FarmFerry Video Thumbnail"
                     fill
                     className="object-cover"
@@ -538,5 +549,6 @@ export default function Home() {
       <FAQSection />
       <Newsletter />
     </motion.div>
+    </>
   );
 }

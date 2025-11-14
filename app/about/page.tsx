@@ -10,19 +10,59 @@ const teamMembers = [
     image: "/founder.jpg",
   },
   {
-    name: "Sarah Johnson",
-    role: "Chief Operations Officer",
+    name: "Tersoo Aga PhD",
+    role: "Principal Advisor",
     image: "/founder.jpg",
   },
   {
-    name: "David Kim",
-    role: "Head of Innovation",
+    name: "Jacob Ishaya",
+    role: "General Manager",
     image: "/founder.jpg",
   },
   {
-    name: "Aisha Bello",
-    role: "Community Manager",
-    image: "/team4.jpg",
+    name: "Lilian Luka",
+    role: "Administrative Director",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Nanwal Peter",
+    role: "Greenhouse Manager",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Jedidiah Nansel",
+    role: "Production Officer",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Glory Kogi",
+    role: "Research and Development Agronomist",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Juliet John",
+    role: "Finance and Accounts Clerk",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Daniel Sule",
+    role: "Lead Programmer",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Seth Ozigi",
+    role: "Marketing and Brand Specialist",
+    image: "/founder.jpg",
+  },
+  {
+    name: "Fortress Michael",
+    role: "Web/e-commerce developer",
+    image: "/founder.jpg",
+  },
+   {
+    name: "Peter Ishaya",
+    role: "Agri-data & Performance Analyst",
+    image: "/founder.jpg",
   },
 ];
 
@@ -151,8 +191,10 @@ export default function AboutPage() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed"
           >
-            To empower rural communities through technology, education, and collaboration —
-            ensuring every farmer has access to the tools and support needed to thrive.
+           At Farm Ferry, we are committed to redefining agriculture through innovation, inclusion, and 
+           empowerment. We provide farm-fresh produce, greenhouse setups, high-quality seedlings, and reliable 
+           farm inputs. Through our hands-on training and expert consultancy, we equip young farmers and 
+           agripreneurs with the knowledge, tools, and opportunities to drive food security, create jobs, and build a sustainable agricultural future.
           </motion.p>
         </div>
       </section>
@@ -176,8 +218,8 @@ export default function AboutPage() {
             transition={{ delay: 0.3, duration: 0.8 }}
             className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed"
           >
-            To create a world where agriculture is sustainable, inclusive, and driven by innovation —
-            where farmers are leaders of positive change in their communities.
+            To be Africa’s leading youth-driven hub for sustainable agriculture — empowering young people, transforming communities, and 
+            ensuring access to safe, fresh, and nutritious food for all.
           </motion.p>
         </div>
       </section>
@@ -230,7 +272,7 @@ export default function AboutPage() {
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.2 }}
             className="text-4xl font-bold text-green-900 mb-12"
           >
             Meet Our Team

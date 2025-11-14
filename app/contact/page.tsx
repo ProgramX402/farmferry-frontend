@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { useState, ChangeEvent, FormEvent } from "react";
+import { FaWhatsapp } from "react-icons/fa";
 
 // Define the form data type
 interface FormData {
@@ -120,15 +121,15 @@ export default function ContactPage() {
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-gray-700">
               <Phone className="text-green-700" />
-              <span>+234 800 123 4567</span>
+              <span>+234 806 845 6855</span>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <MessageCircle className="text-green-700" />
-              <span>WhatsApp: +234 800 987 6543</span>
+              <span>WhatsApp: +234 806 845 6855</span>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <Mail className="text-green-700" />
-              <span>hello@greenfarm.com</span>
+              <span>enochtyulen@gmail.com</span>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <MapPin className="text-green-700" />

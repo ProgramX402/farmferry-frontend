@@ -12,6 +12,14 @@ interface Message {
   timestamp: Date;
 }
 
+// Helper function to format URLs as clickable links
+const formatText = (text: string) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.replace(urlRegex, (url) => {
+    return `<a href="${url}" target="_blank" class="text-blue-500 hover:underline">${url}</a>`;
+  });
+};
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [showChatOptions, setShowChatOptions] = useState(true);
@@ -130,7 +138,7 @@ export default function ChatWidget() {
             <div className="bg-green-900 text-white p-4 rounded-t-2xl flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Bot size={20} />
-                <span className="font-semibold">FarmFerry Assistant</span>
+                <span className="font-semibold">Farm Ferry AI</span>
               </div>
               <button
                 onClick={closeChatWindow}
@@ -145,21 +153,14 @@ export default function ChatWidget() {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${
-                    message.sender === "user"
-                      ? "justify-end"
-                      : "justify-start"
-                  }`}
+                  className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
                 >
                   <div
                     className={`max-w-[70%] rounded-2xl px-3 py-2 text-sm ${
-                      message.sender === "user"
-                        ? "bg-green-900 text-white"
-                        : "bg-gray-100 text-gray-800"
+                      message.sender === "user" ? "bg-green-900 text-white" : "bg-gray-100 text-gray-800"
                     }`}
-                  >
-                    {message.text}
-                  </div>
+                    dangerouslySetInnerHTML={{ __html: formatText(message.text) }}
+                  />
                 </div>
               ))}
 
@@ -188,14 +189,15 @@ export default function ChatWidget() {
             <div className="p-4 border-t border-gray-200">
               <div className="flex items-center gap-2">
                 <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Ask about farming..."
-                  className="flex-1 px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500"
-                  disabled={isTyping}
-                />
+  type="text"
+  value={inputValue}
+  onChange={(e) => setInputValue(e.target.value)}
+  onKeyPress={handleKeyPress}
+  placeholder="Ask about farming..."
+  className="flex-1 px-3 py-2 border border-gray-300 rounded-full text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-green-500"
+  disabled={isTyping}
+/>
+
                 <button
                   onClick={handleSendMessage}
                   disabled={!inputValue.trim() || isTyping}
@@ -219,9 +221,7 @@ export default function ChatWidget() {
             transition={{ duration: 0.3 }}
             className="mb-4 bg-white shadow-xl rounded-2xl border border-gray-200 w-64 p-4 space-y-3"
           >
-            <h3 className="text-green-900 font-semibold text-lg mb-2">
-              Contact Us
-            </h3>
+            <h3 className="text-green-900 font-semibold text-lg mb-2">Contact Us</h3>
 
             <button
               onClick={openAIChat}
@@ -230,9 +230,7 @@ export default function ChatWidget() {
               <div className="p-2 bg-green-100 rounded-full">
                 <Bot className="text-green-700" size={18} />
               </div>
-              <span className="text-gray-700 text-sm font-medium">
-                Chat with AI
-              </span>
+              <span className="text-gray-700 text-sm font-medium">Chat with AI</span>
             </button>
 
             <a
@@ -244,9 +242,7 @@ export default function ChatWidget() {
               <div className="p-2 bg-green-100 rounded-full">
                 <FaWhatsapp className="text-green-700" size={18} />
               </div>
-              <span className="text-gray-700 text-sm font-medium">
-                Chat on WhatsApp
-              </span>
+              <span className="text-gray-700 text-sm font-medium">Chat on WhatsApp</span>
             </a>
 
             <a
@@ -256,9 +252,7 @@ export default function ChatWidget() {
               <div className="p-2 bg-green-100 rounded-full">
                 <Phone className="text-green-700" size={18} />
               </div>
-              <span className="text-gray-700 text-sm font-medium">
-                Call Us
-              </span>
+              <span className="text-gray-700 text-sm font-medium">Call Us</span>
             </a>
 
             <a
@@ -268,9 +262,7 @@ export default function ChatWidget() {
               <div className="p-2 bg-green-100 rounded-full">
                 <Mail className="text-green-700" size={18} />
               </div>
-              <span className="text-gray-700 text-sm font-medium">
-                Send an Email
-              </span>
+              <span className="text-gray-700 text-sm font-medium">Send an Email</span>
             </a>
           </motion.div>
         )}
