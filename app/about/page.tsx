@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+const BACKGROUND = '/produce.jpg'
+
 const teamMembers = [
   {
     name: "Enoch Tyulen",
@@ -83,53 +85,66 @@ const floatVariant = {
 export default function AboutPage() {
   return (
     <main className="bg-white text-gray-900 overflow-hidden">
-      {/* === Hero Section (Modified) === */}
-      <section className="relative bg-green-900 text-white py-24 px-8 text-center overflow-hidden">
-        {/* Floating Circles - Positioned absolutely to float over the background */}
-        <motion.div
-          className="absolute top-1/4 left-[5%] h-16 w-16 bg-white opacity-10 rounded-full"
-          variants={floatVariant}
-          animate="animate"
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-[10%] h-8 w-8 bg-white opacity-10 rounded-full"
-          variants={floatVariant}
-          animate="animate"
-          transition={{ ...floatVariant.animate.transition, y: { duration: 12, repeat: Infinity, ease: "easeInOut" as const } }}
-        />
-        <motion.div
-          className="absolute top-[10%] right-[30%] h-10 w-10 bg-white opacity-10 rounded-full"
-          variants={floatVariant}
-          animate="animate"
-          transition={{ ...floatVariant.animate.transition, y: { duration: 9, repeat: Infinity, ease: "easeInOut" as const } }}
-        />
-        <motion.div
-          className="absolute bottom-[5%] left-[20%] h-24 w-24 bg-white opacity-10 rounded-full"
-          variants={floatVariant}
-          animate="animate"
-          transition={{ ...floatVariant.animate.transition, y: { duration: 15, repeat: Infinity, ease: "easeInOut" as const } }}
-        />
-        
-        {/* Content - Set relative z-index to ensure it sits on top of the circles */}
-        <div className="relative z-10"> 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-5xl md:text-6xl font-bold mb-4"
-          >
-            About Us
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="max-w-2xl mx-auto text-lg text-green-100"
-          >
-            Empowering farmers, transforming agriculture, and building a sustainable future for all.
-          </motion.p>
-        </div>
-      </section>
+     {/* === Hero Section (Clean & Fixed) === */}
+<section className="relative text-white py-32 md:py-52 px-8 text-center overflow-hidden min-h-[70vh] flex items-center justify-center">
+
+  {/* Background */}
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: `url(${BACKGROUND})`,
+    }}
+  >
+    <div className="absolute inset-0 bg-green-900/70"></div>
+  </div>
+
+  {/* FLOATING CIRCLES */}
+  <motion.div
+    className="absolute top-1/4 left-[5%] h-16 w-16 bg-white/10 rounded-full z-10"
+    animate={{ y: [0, -20, 0] }}
+    transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+  />
+
+  <motion.div
+    className="absolute bottom-1/4 right-[10%] h-8 w-8 bg-white/10 rounded-full z-10"
+    animate={{ y: [0, -15, 0] }}
+    transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+  />
+
+  <motion.div
+    className="absolute top-[10%] right-[30%] h-10 w-10 bg-white/10 rounded-full z-10"
+    animate={{ y: [0, -12, 0] }}
+    transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+  />
+
+  <motion.div
+    className="absolute bottom-[5%] left-[20%] h-24 w-24 bg-white/10 rounded-full z-10"
+    animate={{ y: [0, -25, 0] }}
+    transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+  />
+
+  {/* CONTENT */}
+  <div className="relative z-20 max-w-4xl mx-auto">
+    <motion.h1
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      className="text-5xl md:text-8xl font-extrabold mb-6"
+    >
+      About Us
+    </motion.h1>
+
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.3, duration: 0.8 }}
+      className="max-w-3xl mx-auto text-lg md:text-2xl text-green-100 font-medium"
+    >
+      Empowering farmers, transforming agriculture, and building a sustainable future for all.
+    </motion.p>
+  </div>
+</section>
+
 
       {/* --- */}
 

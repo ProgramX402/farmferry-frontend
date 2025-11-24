@@ -234,7 +234,7 @@ export default function ChatWidget() {
             </button>
 
             <a
-              href="https://wa.me/2348068456855"
+              href="https://wa.me/2349138852544"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-2 rounded-lg hover:bg-green-50 transition"
@@ -246,7 +246,7 @@ export default function ChatWidget() {
             </a>
 
             <a
-              href="tel:2348068456855"
+              href="tel:2349138852544"
               className="flex items-center gap-3 p-2 rounded-lg hover:bg-green-50 transition"
             >
               <div className="p-2 bg-green-100 rounded-full">

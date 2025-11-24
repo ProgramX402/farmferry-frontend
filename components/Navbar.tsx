@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import Image from "next/image"; // Import the Image component
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,11 +37,21 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             href="/"
-            className={`text-2xl font-bold tracking-tight transition-colors duration-300 ${
+            className={`flex items-center space-x-2 transition-colors duration-300 ${
               isScrolled ? "text-green-900" : "text-white"
             }`}
           >
-            Farm Ferry
+            {/* Logo Image */}
+            <Image
+              src="/logo.jpeg" // Replace with the actual path to your logo image
+              alt="Farm Ferry Logo"
+              width={40} // Adjust width as needed
+              height={40} // Adjust height as needed
+              className="rounded-full" // Example styling for a circular logo
+            />
+            <span className="text-2xl font-bold tracking-tight">
+              Farm Ferry
+            </span>
           </Link>
 
           {/* Desktop Menu - Added justify-center and used flex-grow for centering */}

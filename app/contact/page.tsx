@@ -121,11 +121,11 @@ export default function ContactPage() {
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-gray-700">
               <Phone className="text-green-700" />
-              <span>+234 806 845 6855</span>
+              <span>+234 913 885 2544</span>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <MessageCircle className="text-green-700" />
-              <span>WhatsApp: +234 806 845 6855</span>
+              <span>WhatsApp: +234 913 885 2544</span>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <Mail className="text-green-700" />
@@ -133,7 +133,7 @@ export default function ContactPage() {
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <MapPin className="text-green-700" />
-              <span>23 Green Valley Road, Abuja, Nigeria</span>
+              <span>Farm Ferry Agro, Lamingo Road, Jos, Plateau State, Nigeria.</span>
             </div>
           </div>
         </motion.div>

@@ -32,6 +32,41 @@ function TypewriterText({ text, speed = 40 }: TypewriterTextProps) {
   return <p className="text-lg md:text-xl italic text-green-100">{displayedText}</p>;
 }
 
+// === New Nested Service Structure ===
+const detailedServices = [
+  {
+    icon: "🥬",
+    title: "Fresh Farm Produce",
+    text: "We provide consumers with fresh, high-quality farm produce delivered directly from our partner farms. Available produce includes:",
+    details: ["Bellpeppers", "Eggs"],
+  },
+  {
+    icon: "🏠",
+    title: "Greenhouse Set Up",
+    text: "We design and construct modern, efficient greenhouse systems to enable year-round production. Options include:",
+    details: ["Wooden Structures", "Galvanized Structures"],
+  },
+  {
+    icon: "🌱",
+    title: "High-Quality Seedlings",
+    text: "Access reliable, disease-resistant seedlings that ensure strong germination and better yields. Available varieties include:",
+    details: ["Bellpeppers", "Habaneros", "Chilis", "Tomatoes"],
+  },
+  {
+    icon: "🎓",
+    title: "Training Programs",
+    text: "We empower farmers and agripreneurs with practical knowledge in modern agriculture and agribusiness through structured programs:",
+    details: ["Corporate Training", "Specialized Training"],
+  },
+  {
+    icon: "💼",
+    title: "Consultancy Services",
+    text: "Our experts provide one-on-one guidance, feasibility studies, and strategic planning to help agribusinesses and farms grow sustainably.",
+    details: [], // Keeping this here but it will display the main text only
+  },
+];
+
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState("overview");
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -204,7 +239,7 @@ export default function Home() {
                   const content =
                     tab === "overview"
                       ? [
-                          `At FarmFerry, we are dedicated to empowering farmers through innovation, technology, and sustainable practices. Our mission is to make agriculture more efficient, profitable, and eco-friendly — ensuring food security and prosperity for generations to come.`,
+                          `At Farm Ferry, we are dedicated to empowering farmers through innovation, technology, and sustainable practices. Our mission is to make agriculture more efficient, profitable, and eco-friendly — ensuring food security and prosperity for generations to come.`,
                           `We partner with local communities, agricultural experts, and NGOs to deliver training, resources, and digital tools that help farmers reach their full potential.`,
                         ]
                       : tab === "vision"
@@ -249,7 +284,7 @@ export default function Home() {
         </div>
       </section>
 
-{/* === Our Services Section === */}
+{/* === Our Services Section (UPDATED) === */}
 <section className="bg-gray-50 py-20 px-6 sm:px-10 overflow-x-hidden">
   <div className="max-w-7xl mx-auto text-center space-y-12">
     {/* Header */}
@@ -261,48 +296,17 @@ export default function Home() {
     >
       <h2 className="text-4xl font-bold text-green-900">Our Services</h2>
       <p className="mt-4 text-lg text-gray-700 max-w-2xl mx-auto">
-        At FarmFerry, we offer a range of agricultural services designed to empower farmers,
+        At Farm Ferry, we offer a range of specialized agricultural services designed to empower farmers,
         boost productivity, and promote sustainable farming practices.
       </p>
     </motion.div>
 
     {/* Services Grid */}
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-      {[
-        {
-          icon: "🥬",
-          title: "Fresh Farm Service",
-          text: "We provide consumers with fresh, organic farm produce delivered directly from our partner farms — ensuring quality, freshness, and traceability.",
-        },
-        {
-          icon: "🏠",
-          title: "Greenhouse Set Up",
-          text: "We design and construct modern greenhouse systems that enable year-round production, efficient irrigation, and climate-smart agriculture.",
-        },
-        {
-          icon: "🌱",
-          title: "Seedlings",
-          text: "Access high-quality, disease-resistant seedlings that ensure strong germination, better yields, and long-term farm success.",
-        },
-        {
-          icon: "🧺",
-          title: "Farm Inputs",
-          text: "We supply reliable, affordable, and certified farm inputs — from fertilizers to tools — helping farmers maximize productivity.",
-        },
-        {
-          icon: "🎓",
-          title: "Training",
-          text: "Through our training programs, we empower farmers and agripreneurs with practical knowledge in modern agriculture and agribusiness.",
-        },
-        {
-          icon: "💼",
-          title: "Consultancy",
-          text: "Our experts provide one-on-one guidance, feasibility studies, and strategic planning to help agribusinesses and farms grow sustainably.",
-        },
-      ].map((service, i) => (
+      {detailedServices.map((service, i) => (
         <motion.div
           key={i}
-          className="bg-white rounded-xl shadow-md p-8 text-left hover:shadow-lg transition transform hover:-translate-y-2"
+          className="bg-white rounded-xl shadow-md p-8 text-left hover:shadow-lg transition transform hover:-translate-y-2 flex flex-col"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: i * 0.1, duration: 0.6 }}
@@ -312,7 +316,18 @@ export default function Home() {
           <h3 className="text-2xl font-semibold text-green-900 mb-3">
             {service.title}
           </h3>
-          <p className="text-gray-700 leading-relaxed">{service.text}</p>
+          <p className="text-gray-700 leading-relaxed flex-grow">
+            {service.text}
+          </p>
+          {service.details && service.details.length > 0 && (
+            <ul className="mt-4 text-gray-600 list-disc list-inside space-y-1 pl-2">
+              {service.details.map((detail, j) => (
+                <li key={j} className="text-base text-green-800 font-medium">
+                  {detail}
+                </li>
+              ))}
+            </ul>
+          )}
         </motion.div>
       ))}
     </div>
@@ -328,7 +343,7 @@ export default function Home() {
         href="/services"
         className="inline-block mt-10 bg-green-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-800 transition"
       >
-        Learn More
+        View All Services
       </a>
     </motion.div>
   </div>
@@ -367,7 +382,7 @@ export default function Home() {
             />
             <div className="mt-6">
               <p className="font-semibold text-green-200">— Enoch Tyulen</p>
-              <p className="text-sm text-green-300">Founder & CEO, FarmFerry</p>
+              <p className="text-sm text-green-300">Founder & CEO, Farm Ferry</p>
             </div>
           </motion.div>
         </div>
@@ -403,7 +418,7 @@ export default function Home() {
                 {
                   name: "John Musa",
                   location: "Kaduna, Nigeria",
-                  text: "FarmFerry transformed the way I manage my farm. Their training helped me double my yields in one season!",
+                  text: "Farm Ferry transformed the way I manage my farm. Their training helped me double my yields in one season!",
                 },
                 {
                   name: "Grace Nwosu",
@@ -423,7 +438,7 @@ export default function Home() {
                 {
                   name: "Samuel Danjuma",
                   location: "Plateau, Nigeria",
-                  text: "Access to modern tools and guidance through FarmFerry made me more confident as a farmer.",
+                  text: "Access to modern tools and guidance through Farm Ferry made me more confident as a farmer.",
                 },
                 {
                   name: "Chinwe Okeke",
@@ -464,7 +479,7 @@ export default function Home() {
           >
             <h2 className="text-4xl font-bold text-green-900">See Our Work in Action</h2>
             <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-              Watch how FarmFerry is transforming agriculture and empowering farmers across Nigeria. 
+              Watch how Farm Ferry is transforming agriculture and empowering farmers across Nigeria. 
               Our innovative approach combines traditional wisdom with modern technology to create sustainable solutions.
             </p>
           </motion.div>
