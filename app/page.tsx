@@ -11,6 +11,14 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Head from "next/head";
 import { Autoplay, Pagination } from "swiper/modules";
+import { Manrope } from "next/font/google"; // 1. Import Manrope
+
+// 2. Define Manrope Font Instance
+const manrope = Manrope({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-manrope", // Defines the CSS variable name
+});
 
 // === Typewriter Effect Helper ===
 interface TypewriterTextProps {
@@ -91,78 +99,88 @@ export default function Home() {
   return (
     <>
     <Head>
-          <title>My Page Title</title>
-          <meta name="description" content="This is a description of my page" />
-          <meta property="og:title" content="My Page Title" />
-          <meta property="og:description" content="This is a description of my page" />
-          <meta property="og:type" content="website" />
-          {/* Add other meta tags as needed */}
-        </Head>
+      <title>My Page Title</title>
+      <meta name="description" content="This is a description of my page" />
+      <meta property="og:title" content="My Page Title" />
+      <meta property="og:description" content="This is a description of my page" />
+      <meta property="og:type" content="website" />
+      {/* Add other meta tags as needed */}
+    </Head>
 
     <motion.div
       variants={pageVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="overflow-x-hidden w-full"
+      className={`overflow-x-hidden w-full ${manrope.className}`} // 3. Apply the Manrope class
     >
       {/* === Hero Section === */}
-      <section className="relative flex min-h-screen flex-col-reverse md:flex-row items-center justify-center bg-green-900 text-white px-6 sm:px-10 py-20">
-        {/* Background Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-green-900 via-green-900 to-green-900 opacity-95 z-0"></div>
+<section className="relative flex min-h-screen items-center justify-center text-white px-6 sm:px-10 py-20 overflow-hidden">
 
-        <div className="relative z-10 max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12 w-full">
-          {/* Left Text */}
-          <motion.div
-            className="flex-1 space-y-6 text-center md:text-left"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-5xl font-bold leading-tight">
-              Empowering Farmers, Growing the Future 🌱
-            </h1>
-            <p className="text-lg text-green-100 max-w-md mx-auto md:mx-0">
-              We help small-scale farmers increase productivity, access markets,
-              and build sustainable livelihoods using modern agricultural
-              technology and community support.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a
-                href="/services"
-                className="bg-white text-green-900 font-semibold px-6 py-3 rounded-lg hover:bg-green-100 transition"
-              >
-                Get Started
-              </a>
-              <a
-                href="/about"
-                className="border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-800 transition"
-              >
-                Learn More
-              </a>
-            </div>
-          </motion.div>
+  {/* Background Video */}
+  <video
+    autoPlay
+    loop
+    muted
+    playsInline
+    className="absolute inset-0 w-full h-full object-cover"
+  >
+    <source src="/hero.mp4" type="video/mp4" />
+    <source src="/hero.mp4" type="video/mp4" />
+  </video>
 
-          {/* Right Image */}
-          <motion.div
-            className="flex-1 flex justify-center"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <Image
-              src="/hero-img.jpg"
-              alt="Farmer illustration"
-              width={500}
-              height={400}
-              priority
-              className="w-full h-auto max-w-[450px] sm:max-w-[500px] rounded-xl shadow-2xl"
-            />
-          </motion.div>
-        </div>
-      </section>
+  {/* Dark Overlay */}
+  <div className="absolute inset-0 backdrop-blur-[2px]"></div>
+
+  {/* Content Container */}
+  <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center md:items-start text-center md:text-left space-y-6">
+
+    <motion.h1
+      className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      Empowering Farmers, Growing the Future 🌱
+    </motion.h1>
+
+    <motion.p
+      className="text-lg text-green-100 max-w-xl"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      viewport={{ once: true }}
+    >
+      We help small-scale farmers increase productivity, access markets,
+      and build sustainable livelihoods using modern agricultural
+      technology and community support.
+    </motion.p>
+
+    <motion.div
+      className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      viewport={{ once: true }}
+    >
+      <a
+        href="/services"
+        className="bg-white text-green-900 font-semibold px-6 py-3 rounded-lg hover:bg-green-100 transition"
+      >
+        Get Started
+      </a>
+      <a
+        href="/about"
+        className="border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-800 transition"
+      >
+        Learn More
+      </a>
+    </motion.div>
+
+  </div>
+</section>
+
 
       {/* === About Us Section === */}
       <section className="bg-white text-gray-900 py-20 px-6 sm:px-10 overflow-x-hidden">
@@ -413,6 +431,7 @@ export default function Home() {
               autoplay={{ delay: 3500, disableOnInteraction: false }}
               loop={true}
               pagination={{ clickable: true }}
+              modules={[Autoplay, Pagination]}
             >
               {[
                 {
