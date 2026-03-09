@@ -23,18 +23,18 @@ export async function POST(request) {
 
     // === 2️⃣ Define mail options ===
     const mailOptions = {
-      from: `"GreenFarm Contact Form" <${process.env.EMAIL_USER}>`,
+      from: `"Farm Ferry Contact Form" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO,
       subject: `🌿 New Contact Message: ${subject}`,
       html: `
-        <h2>New Message from GreenFarm Contact Form</h2>
+        <h2>New Message from Farm Ferry Contact Form</h2>
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Subject:</strong> ${subject}</p>
         <p><strong>Message:</strong></p>
         <p>${message}</p>
         <hr />
-        <small>Sent via GreenFarm website</small>
+        <small>Sent via Farm Ferry website</small>
       `,
     };
 
