@@ -281,7 +281,7 @@ export default function AboutPage() {
 
       {/* --- */}
 
-      {/* === Team Section === */}
+      {/* === Team Section ===
       <section className="py-20 px-8">
         <div className="max-w-6xl mx-auto text-center">
           <motion.h2
@@ -315,7 +315,7 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

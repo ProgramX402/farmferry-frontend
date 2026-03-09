@@ -21,7 +21,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const links = ["Home", "About", "Services", "Blogs"];
+  const links = ["Home", "About", "Services", "Blogs", "Contact"];
 
   return (
     <nav
@@ -96,14 +96,14 @@ export default function Navbar() {
           <div className="flex items-center">
             {/* Contact Button */}
             <Link
-              href="/contact"
+              href="/shop"
               className={`hidden md:block ml-4 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                 isScrolled
                   ? "bg-green-700 text-white hover:bg-green-800"
                   : "bg-white text-green-900 hover:bg-gray-100"
               }`}
             >
-              Contact Us
+              Shop
             </Link>
 
             {/* Mobile menu button */}
@@ -152,7 +152,7 @@ export default function Navbar() {
               );
             })}
             <Link
-              href="/contact"
+              href="/shop"
               onClick={() => setIsOpen(false)}
               className={`block text-center px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                 isScrolled
@@ -160,7 +160,7 @@ export default function Navbar() {
                   : "bg-white text-green-900 hover:bg-gray-100"
               }`}
             >
-              Contact Us
+              Shop
             </Link>
           </div>
         </div>

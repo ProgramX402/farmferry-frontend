@@ -78,12 +78,12 @@ export default function ContactPage() {
     <div className="bg-gray-50 min-h-screen">
       {/* === Hero Section === */}
       <section className="relative w-full h-[65vh] flex items-center justify-center overflow-hidden">
-        <Image
+        {/* <Image
           src="/images/contact-hero.jpg"
           alt="Contact Us"
           fill
           className="object-cover object-center"
-        />
+        /> */}
         <div className="absolute inset-0 bg-green-900 opacity-100" />
         <motion.div
           initial={{ opacity: 0, y: -30 }}
@@ -129,11 +129,11 @@ export default function ContactPage() {
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <Mail className="text-green-700" />
-              <span>enochtyulen@gmail.com</span>
+              <span>farmferryagro@gmail.com</span>
             </div>
             <div className="flex items-center gap-3 text-gray-700">
               <MapPin className="text-green-700" />
-              <span>Farm Ferry Agro, Lamingo Road, Jos, Plateau State, Nigeria.</span>
+              <span>Farm Ferry Agro, Lamingo Rd, Jos 930105, Plateau State, Nigeria.</span>
             </div>
           </div>
         </motion.div>

@@ -13,15 +13,12 @@ import {
   Clock,
   MapPin,
   UserCheck,
-  ArrowRight, // Import for the new button icon
+  ArrowRight,
 } from "lucide-react";
 
 // *** IMAGE PLACEHOLDER GUIDES - REPLACE THESE WITH YOUR ACTUAL IMAGE URLs ***
 const PLACEHOLDERS = {
   HERO_BACKGROUND: "/people.jpg",
-  PRODUCE_1: "/produce.jpg",
-  PRODUCE_2: "/produce2.jpg",
-  PRODUCE_3: "/produce3.jpg",
   GREENHOUSE_1: "/gh1.jpg",
   GREENHOUSE_2: "/gh2.jpg",
   GREENHOUSE_3: "/gh3.jpg",
@@ -34,9 +31,6 @@ const PLACEHOLDERS = {
   CONSULTANCY_1: "/con1.jpg",
   CONSULTANCY_2: "/con2.jpg",
   CONSULTANCY_3: "/con3.jpg",
-  INPUTS_1: "/inp1.jpg",
-  INPUTS_2: "/inp2.jpg",
-  INPUTS_3: "/inp3.jpg",
 };
 
 // *** FORMSPREE INTEGRATION ***
@@ -106,16 +100,8 @@ const trainingPackages = [
   },
 ];
 
-// *** SERVICES LIST ***
+// *** SERVICES LIST (UPDATED - Removed Fresh Farm Produce and Farm Inputs) ***
 const services: Service[] = [
-  {
-    icon: Sprout,
-    title: "Fresh Farm Produce",
-    description: "High-quality, farm-fresh produce available for consumers and businesses.",
-    details: "We connect consumers and retailers directly to high-quality farm produce. Specific products include: **Bellpeppers** and **Eggs**. We focus on ensuring high quality, food safety, and fair pricing at the farm gate.",
-    images: [PLACEHOLDERS.PRODUCE_1, PLACEHOLDERS.PRODUCE_2, PLACEHOLDERS.PRODUCE_3],
-    formType: "order",
-  },
   {
     icon: Sprout,
     title: "Greenhouse Set Up",
@@ -149,14 +135,6 @@ const services: Service[] = [
     images: [PLACEHOLDERS.CONSULTANCY_1, PLACEHOLDERS.CONSULTANCY_2, PLACEHOLDERS.CONSULTANCY_3],
     formType: "consultation",
     packages: consultancyPackages,
-  },
-  {
-    icon: Sprout,
-    title: "Farm Inputs",
-    description: "Affordable fertilizers, pesticides, and quality agricultural tools.",
-    details: "We connect farmers with reliable suppliers for fertilizers, organic manure, irrigation systems, and protective equipment — all verified to ensure quality and value for money.",
-    images: [PLACEHOLDERS.INPUTS_1, PLACEHOLDERS.INPUTS_2, PLACEHOLDERS.INPUTS_3],
-    formType: "order",
   },
 ];
 
@@ -620,7 +598,7 @@ export default function ServicesPage() {
 
       {/* === Services Grid (MODIFIED) === */}
       <section className="py-20 px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-10">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
@@ -629,7 +607,6 @@ export default function ServicesPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.15, duration: 0.6 }}
-                // NOTE: Removed onClick from the main div for better accessibility.
                 className="bg-green-50 rounded-xl shadow-md hover:shadow-lg p-8 flex flex-col items-center text-center transition transform hover:-translate-y-2"
               >
                 <div className="bg-green-900 text-white p-4 rounded-full mb-6">

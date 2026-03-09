@@ -46,7 +46,7 @@ export default function Footer() {
           <ul className="space-y-3 text-green-200 text-sm">
             <li>
               <span className="font-semibold text-green-100">Address:</span><br />
-              Farm Ferry Agro, Lamingo Road, Jos, Plateau State, Nigeria.
+              Farm Ferry Agro, Lamingo Rd, Jos 930105, Plateau State, Nigeria.
             </li>
             <li>
               <span className="font-semibold text-green-100">Phone:</span><br />
@@ -54,7 +54,7 @@ export default function Footer() {
             </li>
             <li>
               <span className="font-semibold text-green-100">Email:</span><br />
-              enouchtyulen@gmail.com
+              farmferryagro@gmail.com
             </li>
           </ul>
         </div>

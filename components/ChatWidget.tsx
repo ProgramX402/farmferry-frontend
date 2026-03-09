@@ -256,7 +256,7 @@ export default function ChatWidget() {
             </a>
 
             <a
-              href="mailto:enochtyulen@gmail.com"
+              href="mailto:farmferryagro@gmail.com"
               className="flex items-center gap-3 p-2 rounded-lg hover:bg-green-50 transition"
             >
               <div className="p-2 bg-green-100 rounded-full">

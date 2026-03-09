@@ -165,16 +165,16 @@ export default function Home() {
       viewport={{ once: true }}
     >
       <a
-        href="/services"
+        href="/shop"
         className="bg-white text-green-900 font-semibold px-6 py-3 rounded-lg hover:bg-green-100 transition"
       >
-        Get Started
+        Shop for Products
       </a>
       <a
-        href="/about"
+        href="/services"
         className="border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-green-800 transition"
       >
-        Learn More
+        Book Our Services
       </a>
     </motion.div>
 
