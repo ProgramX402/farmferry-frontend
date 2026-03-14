@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Farm Ferry - Fresh Local Produce Delivered",
     description: "Connecting you with the best local farms. Get fresh, sustainable produce delivered right to your door.",
-    url: "https://farmferry.netlify.app", // IMPORTANT: Use your live domain here
+    url: "https://farmferryagro.netlify.app", // IMPORTANT: Use your live domain here
     siteName: "Farm Ferry",
     images: [
       {
@@ -66,8 +66,8 @@ export default function RootLayout({
     "@type": "Organization", // Or "LocalBusiness" if you have a physical location
     name: "Farm Ferry",
     description: "A service connecting local farms with consumers for fresh produce delivery.",
-    url: "https://farmferry.netlify.app",
-    logo: "https://farmferry.netlify.app/images/logo.png", // IMPORTANT: Create a logo for this
+    url: "https://farmferryagro.netlify.app",
+    logo: "https://farmferryagro.netlify.app/images/logo.png", // IMPORTANT: Create a logo for this
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+234 913 885 2544", // Add your phone number

@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
       headers: {
         Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`, // server-only
         "Content-Type": "application/json",
-        "HTTP-Referer": "https://farmferry.netlify.app/", // must match your domain exactly (no trailing slash)
+        "HTTP-Referer": "https://farmferryagro.netlify.app/", // must match your domain exactly (no trailing slash)
         "X-Title": "FarmFerry Chat",
       },
       body: JSON.stringify({
@@ -111,8 +111,8 @@ Use this when needed:
 
 • **Office**: Farm Ferry Agro, Lamingo Road, Jos, Plateau State, Nigeria.
 • **Phone & WhatsApp**: +234 913 885 2544  
-• **Email**: enochtyulen@gmail.com  
-• **Website**: https://farmferry.netlify.app
+• **Email**: farmferryagro@gmail.com  
+• **Website**: https://farmferryagro.netlify.app
 
 Social Media:  
 - Instagram: @farm_ferry  
