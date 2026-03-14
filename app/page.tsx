@@ -129,8 +129,8 @@ export default function Home() {
     <source src="/hero.mp4" type="video/mp4" />
   </video>
 
-  {/* Dark Overlay */}
-  <div className="absolute inset-0 backdrop-blur-[2px]"></div>
+  {/* Green Overlay with Blur */}
+  <div className="absolute inset-0 bg-green-900/70 backdrop-blur-[2px]"></div>
 
   {/* Content Container */}
   <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center md:items-start text-center md:text-left space-y-6">
@@ -262,11 +262,11 @@ export default function Home() {
                         ]
                       : tab === "vision"
                       ? [
-                          `To be Africa’s leading youth-driven hub for sustainable agriculture — empowering young people, transforming communities, and ensuring access to safe, fresh, and nutritious food for all.`,
+                          `To be Africa's leading youth-driven hub for sustainable agriculture — empowering young people, transforming communities, and ensuring access to safe, fresh, and nutritious food for all.`,
                           `We believe in bridging traditional wisdom with modern technology, building resilient food systems that nurture people and the planet alike.`,
                         ]
                       : [
-                          `At Farm Ferry, we are committed to redefining agriculture through innovation, inclusion, and empowerment. We provide farm-fresh produce, greenhouse setups, high-quality seedlings, and reliable farm inputs. Through our hands-on training and expert consultancy, we equip young farmers and agripreneurs with the knowledge, tools, and opportunities to drive food security, create jobs, and build a sustainable agricultural future.`,
+                          `At Farm Ferry, we are committed to redefining agriculture through innovation, inclusion, and empowerment. We provide farm-fresh produce, greenhouse setups, high-quality seedlings, and reliable farm inputs. Through our hands-on training and expert consultancy, we equip young farmers and agripreneurs with the knowledge, tools, and opportunities to drive food security, create jobs, and build a sustainable agricultural future.`,
                         ];
 
                   return (
@@ -396,7 +396,7 @@ export default function Home() {
           >
             <h2 className="text-4xl font-bold">A Word from Our Founder</h2>
             <TypewriterText
-              text={`"Farming is not just an occupation — it's a legacy. At Farm Ferry, we're building a bridge between tradition and technology to ensure that every seed planted today nurtures a brighter, greener tomorrow."`}
+              text={`"Farm Ferry is an agro platform founded with the vision of unlocking and amplifying the vast opportunities within agriculture, particularly for young people across Africa. It is designed to empower youths to leverage their creativity and innovativeness to transform agriculture into a sustainable and profitable venture, repositioning it as a driver of development rather than a fallback option. By building a strong bridge between traditional agricultural practices and modern technology, Farm Ferry seeks to inspire a new generation to take ownership of Africa's agricultural future and contribute meaningfully to long-term economic growth and sustainability."`}
             />
             <div className="mt-6">
               <p className="font-semibold text-green-200">— Enoch Tyulen</p>

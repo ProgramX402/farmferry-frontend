@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useEffect, useState, useMemo, ChangeEvent } from "react";
@@ -246,7 +245,7 @@ export default function MarketplacePage() {
         itemsText += `${item.name} x${item.quantity} - ₦${item.price * item.quantity}\n`;
       });
 
-      const formspreeResponse = await fetch("https://formspree.io/f/xeelgwvr", {
+      const formspreeResponse = await fetch("https://formspree.io/f/xpqylrny", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
