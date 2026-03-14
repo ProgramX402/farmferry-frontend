@@ -6,7 +6,6 @@ import {
   collection,
   getDocs,
   addDoc,
-  updateDoc,
   doc,
   Timestamp,
 } from "firebase/firestore";
@@ -19,10 +18,8 @@ interface Product {
   _id: string;
   name: string;
   price: number;
-  stock?: number;
   description?: string;
   image?: { url: string };
-  totalSold?: number;
   section: string;
   category: string;
 }
@@ -89,10 +86,8 @@ export default function MarketplacePage() {
             _id: doc.id,
             name: prodData.name,
             price: prodData.price,
-            stock: prodData.stock,
             description: prodData.description,
             image: prodData.image,
-            totalSold: prodData.totalSold ?? 0,
             section: prodData.section,
             category: prodData.category,
           };
@@ -166,7 +161,7 @@ export default function MarketplacePage() {
       if (existing) {
         const updated = prev.map((item) =>
           item._id === product._id
-            ? { ...item, quantity: Math.min(item.quantity + qty, product.stock ?? qty) }
+            ? { ...item, quantity: item.quantity + qty }
             : item
         );
         return updated;
@@ -186,7 +181,7 @@ export default function MarketplacePage() {
   const updateCartQuantity = (id: string, qty: number): void => {
     setCart((prev) =>
       prev.map((item) =>
-        item._id === id ? { ...item, quantity: Math.min(qty, item.stock ?? qty) } : item
+        item._id === id ? { ...item, quantity: qty } : item
       )
     );
   };
@@ -230,16 +225,6 @@ export default function MarketplacePage() {
 
       await addDoc(collection(db, "orders"), orderData);
 
-      for (const item of cart) {
-        const productRef = doc(db, "products", item._id);
-        const newStock = (item.stock ?? 0) - item.quantity;
-        const newSold = (item.totalSold ?? 0) + item.quantity;
-        await updateDoc(productRef, {
-          stock: newStock >= 0 ? newStock : 0,
-          totalSold: newSold,
-        });
-      }
-
       let itemsText = "";
       cart.forEach((item) => {
         itemsText += `${item.name} x${item.quantity} - ₦${item.price * item.quantity}\n`;
@@ -269,7 +254,6 @@ export default function MarketplacePage() {
       setCart([]);
       setOrderForm({ name: "", email: "", phone: "" });
       setIsOrderFormOpen(false);
-      fetchProducts();
 
       addToast("success", "Order submitted successfully!");
     } catch (error: any) {
@@ -427,9 +411,6 @@ export default function MarketplacePage() {
                         <h3 className="text-lg font-semibold text-gray-900">{product.name}</h3>
                         <p className="text-xs text-gray-500 mt-1 capitalize">{product.category}</p>
                         <p className="text-green-700 font-bold mt-1">₦{product.price}</p>
-                        <p className="text-sm text-gray-500 mt-1">
-                          Total Sold: {product.totalSold ?? 0}
-                        </p>
                         <button
                           onClick={() => openModal(product)}
                           className="mt-auto w-full bg-green-700 text-white py-2.5 rounded-xl font-medium hover:bg-green-800 transition"
@@ -474,7 +455,6 @@ export default function MarketplacePage() {
                     <input
                       type="number"
                       min={1}
-                      max={item.stock ?? 1}
                       value={item.quantity}
                       onChange={(e) => updateCartQuantity(item._id, Number(e.target.value))}
                       className="w-20 mt-1 border rounded px-2 py-1 text-black"
@@ -543,9 +523,6 @@ export default function MarketplacePage() {
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900">{selectedProduct.name}</h2>
                     <p className="text-green-700 text-xl font-semibold mt-1">₦{selectedProduct.price}</p>
-                    <p className="text-gray-500 mt-2 text-sm">
-                      Total Sold: {selectedProduct.totalSold ?? 0}
-                    </p>
                   </div>
                   <button
                     onClick={closeModal}
@@ -555,35 +532,20 @@ export default function MarketplacePage() {
                   </button>
                 </div>
 
-                {selectedProduct.stock !== undefined && (
-                  <span
-                    className={`inline-block mt-4 px-4 py-1 rounded-full text-sm font-medium ${
-                      selectedProduct.stock > 0
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {selectedProduct.stock > 0 ? `${selectedProduct.stock} in stock` : "Out of stock"}
-                  </span>
-                )}
-
                 {selectedProduct.description && (
                   <p className="mt-4 text-gray-600 leading-relaxed">{selectedProduct.description}</p>
                 )}
 
-                {selectedProduct.stock && selectedProduct.stock > 0 && (
-                  <div className="mt-4 flex items-center gap-3">
-                    <label className="font-medium text-black">Quantity:</label>
-                    <input
-                      type="number"
-                      min={1}
-                      max={selectedProduct.stock}
-                      value={quantity}
-                      onChange={(e) => setQuantity(Number(e.target.value))}
-                      className="w-20 border rounded px-2 py-1 text-black"
-                    />
-                  </div>
-                )}
+                <div className="mt-4 flex items-center gap-3">
+                  <label className="font-medium text-black">Quantity:</label>
+                  <input
+                    type="number"
+                    min={1}
+                    value={quantity}
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                    className="w-20 border rounded px-2 py-1 text-black"
+                  />
+                </div>
 
                 <div className="mt-8 flex gap-3">
                   <button
